@@ -2,8 +2,8 @@ import { mulberry32 } from "./rng";
 import { createWorld, START_POS } from "./world";
 import type { ActionId, ActionOption, ActionResult, Dir, GameState, Speed, Tile } from "./types";
 
-/** 10 in-game days = 1 real minute → one day lasts 6 real seconds at x1. */
-export const DAY_MS = 6000;
+/** 1 in-game day = 1 real minute at x1. */
+export const DAY_MS = 60_000;
 export const TOTAL_DAYS = 100;
 export const SPEEDS: Speed[] = [1, 2, 4];
 export const START_METER = 50;

@@ -5,14 +5,14 @@ import type { GameState } from "./types";
 const clone = (s: GameState): GameState => JSON.parse(JSON.stringify(s));
 
 describe("tiempo de juego", () => {
-  it("10 días de juego duran 1 minuto real a velocidad x1", () => {
-    expect(advanceDays(0, 60_000, 1)).toBe(10);
-    expect(DAY_MS).toBe(6000);
+  it("1 día de juego dura 1 minuto real a velocidad x1", () => {
+    expect(advanceDays(0, 60_000, 1)).toBe(1);
+    expect(DAY_MS).toBe(60_000);
   });
 
   it("x2 y x4 aceleran el reloj", () => {
-    expect(advanceDays(0, 60_000, 2)).toBe(20);
-    expect(advanceDays(0, 60_000, 4)).toBe(40);
+    expect(advanceDays(0, 60_000, 2)).toBe(2);
+    expect(advanceDays(0, 60_000, 4)).toBe(4);
   });
 
   it("la partida termina en el día 100", () => {
@@ -26,8 +26,8 @@ describe("tiempo de juego", () => {
     const slow = newGame(7);
     const fast = clone(slow);
     fast.speed = 4;
-    for (let i = 0; i < 160; i++) tick(slow, 1500); // 40 días a x1
-    for (let i = 0; i < 40; i++) tick(fast, 1500); // 40 días a x4
+    for (let i = 0; i < 160; i++) tick(slow, 15_000); // 40 días a x1
+    for (let i = 0; i < 40; i++) tick(fast, 15_000); // 40 días a x4
     expect(fast.processedDays).toBe(40);
     expect(slow.processedDays).toBe(40);
     expect(fast.meter).toBe(slow.meter);
