@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Game logic lives in `src/game/` as plain TS (rules.ts is pure and unit-tested; engine.ts owns the canvas loop, input and autosave); React components in `src/components/game/` only render HUD from the engine snapshot. Why: keeps rules testable and the render loop out of React.
+- Daily simulation must be deterministic per seed + day and depend only on whole days crossed, never on real-time speed. Why: speed buttons must not change outcomes.
+- Visuals are procedural pixel art: sprites as string maps in sprites.ts, colors lerped between two palettes by the meter in palette.ts. Why: gradual, meter-driven transitions without image assets.
+- Progress persists in localStorage (single-player, no accounts). Why: autosave without a backend.
